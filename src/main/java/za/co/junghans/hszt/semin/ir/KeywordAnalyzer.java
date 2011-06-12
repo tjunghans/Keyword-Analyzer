@@ -5,17 +5,14 @@ import java.awt.*;
 
 /**
  * Hello world!
- *
  */
-public class KeywordAnalyzer
-{
-    public static void main( String[] args )
-    {
+public class KeywordAnalyzer {
+    public static void main(String[] args) {
         showUI();
     }
 
     private static void showUI() {
-        JFrame frame = new JFrame("Keyword Analyzer ");
+        JFrame frame = new JFrame("Keyword Analyzer");
         frame.setPreferredSize(new Dimension(600, 500));
         frame.setLocationRelativeTo(null);
         frame.setContentPane(new AnalyzerGui().getForm());

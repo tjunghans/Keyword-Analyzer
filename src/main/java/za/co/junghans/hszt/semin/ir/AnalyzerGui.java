@@ -1,14 +1,14 @@
 package za.co.junghans.hszt.semin.ir;
 
-import com.intellij.uiDesigner.core.GridConstraints;
-import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
 import org.apache.log4j.Logger;
+import za.co.junghans.hszt.semin.ir.analyzer.Analyzer;
+import za.co.junghans.hszt.semin.ir.analyzer.AnalyzerImpl;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 /**
  * User: dkummer
@@ -19,6 +19,8 @@ public class AnalyzerGui {
     private JTextArea txtInputHtml;
     private JButton btnCalculate;
     private JPanel form;
+    private JTextField txtKeywords;
+    private JTextArea txtResults;
 
     private Logger log = Logger.getLogger(AnalyzerGui.class);
 
@@ -26,10 +28,11 @@ public class AnalyzerGui {
     public AnalyzerGui() {
         btnCalculate.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent actionEvent) {
-                if (actionEvent.getActionCommand().equals("btnCalculate")) {
-                    //do it baby!
-                    log.debug("Do some calculating baby!");
-                }
+                //do it baby!
+                log.debug("Do some calculating baby!");
+                Analyzer analyzer = new AnalyzerImpl();
+                String result = analyzer.analyze(txtInputHtml.getText(), Arrays.asList(txtKeywords.getText().split(",")));
+                txtResults.setText(result);
             }
         });
     }
@@ -54,28 +57,95 @@ public class AnalyzerGui {
      */
     private void $$$setupUI$$$() {
         form = new JPanel();
-        form.setLayout(new GridLayoutManager(6, 1, new Insets(10, 10, 10, 10), -1, -1));
+        form.setLayout(new GridBagLayout());
         final JLabel label1 = new JLabel();
         label1.setText("HTML Input");
         label1.setToolTipText("");
-        form.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        GridBagConstraints gbc;
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        form.add(label1, gbc);
         txtInputHtml = new JTextArea();
         txtInputHtml.setEditable(true);
         txtInputHtml.setText("Insert HTML here");
-        form.add(txtInputHtml, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(-1, 200), new Dimension(150, 150), null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+        gbc.fill = GridBagConstraints.BOTH;
+        form.add(txtInputHtml, gbc);
         final JLabel label2 = new JLabel();
         label2.setText("Keywords");
-        form.add(label2, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JTextField textField1 = new JTextField();
-        textField1.setText("Keyword 1, Keyword 2");
-        form.add(textField1, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        form.add(label2, gbc);
+        txtKeywords = new JTextField();
+        txtKeywords.setText("Keyword 1, Keyword 2");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        gbc.weightx = 1.0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        form.add(txtKeywords, gbc);
         btnCalculate = new JButton();
         btnCalculate.setText("Calculate!");
         btnCalculate.setMnemonic('C');
         btnCalculate.setDisplayedMnemonicIndex(0);
-        form.add(btnCalculate, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final Spacer spacer1 = new Spacer();
-        form.add(spacer1, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 6;
+        gbc.weightx = 1.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        form.add(btnCalculate, gbc);
+        final JPanel spacer1 = new JPanel();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        form.add(spacer1, gbc);
+        final JPanel spacer2 = new JPanel();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        form.add(spacer2, gbc);
+        final JPanel spacer3 = new JPanel();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        form.add(spacer3, gbc);
+        final JPanel spacer4 = new JPanel();
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 9;
+        gbc.fill = GridBagConstraints.VERTICAL;
+        form.add(spacer4, gbc);
+        final JLabel label3 = new JLabel();
+        label3.setText("Results");
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 7;
+        gbc.anchor = GridBagConstraints.WEST;
+        form.add(label3, gbc);
+        txtResults = new JTextArea();
+        txtResults.setEditable(false);
+        txtResults.setEnabled(false);
+        gbc = new GridBagConstraints();
+        gbc.gridx = 1;
+        gbc.gridy = 8;
+        gbc.fill = GridBagConstraints.BOTH;
+        form.add(txtResults, gbc);
+        label1.setLabelFor(txtInputHtml);
+        label2.setLabelFor(txtKeywords);
     }
 
     /**
