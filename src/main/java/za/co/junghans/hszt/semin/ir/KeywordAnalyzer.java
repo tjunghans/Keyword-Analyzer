@@ -12,7 +12,7 @@ public class KeywordAnalyzer {
     }
 
     private static void showUI() {
-        JFrame frame = new JFrame("Keyword Analyzer");
+        JFrame frame = new JFrame("Keyword KwAnalyzer");
         frame.setPreferredSize(new Dimension(600, 500));
         frame.setLocationRelativeTo(null);
         frame.setContentPane(new AnalyzerGui().getForm());

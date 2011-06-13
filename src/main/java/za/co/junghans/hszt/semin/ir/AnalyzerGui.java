@@ -1,8 +1,8 @@
 package za.co.junghans.hszt.semin.ir;
 
 import org.apache.log4j.Logger;
-import za.co.junghans.hszt.semin.ir.analyzer.Analyzer;
-import za.co.junghans.hszt.semin.ir.analyzer.AnalyzerImpl;
+import za.co.junghans.hszt.semin.ir.analyzer.KwAnalyzer;
+import za.co.junghans.hszt.semin.ir.analyzer.LuceneKwAnalyzer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,8 +30,8 @@ public class AnalyzerGui {
             public void actionPerformed(ActionEvent actionEvent) {
                 //do it baby!
                 log.debug("Do some calculating baby!");
-                Analyzer analyzer = new AnalyzerImpl();
-                String result = analyzer.analyze(txtInputHtml.getText(), Arrays.asList(txtKeywords.getText().split(",")));
+                KwAnalyzer kwAnalyzer = new LuceneKwAnalyzer();
+                String result = kwAnalyzer.analyze(txtInputHtml.getText(), Arrays.asList(txtKeywords.getText().split(",")));
                 txtResults.setText(result);
             }
         });
