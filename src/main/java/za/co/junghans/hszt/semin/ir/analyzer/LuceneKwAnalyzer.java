@@ -26,7 +26,7 @@ public class LuceneKwAnalyzer implements KwAnalyzer {
         fieldName = "fieldName";
     }
 
-    @Override
+    
     public String analyze(String input, List<String> keywords) {
 
         StringBuffer resultBuffer = new StringBuffer();
