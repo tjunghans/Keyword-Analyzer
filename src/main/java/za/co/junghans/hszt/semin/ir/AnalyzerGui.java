@@ -1,10 +1,18 @@
 package za.co.junghans.hszt.semin.ir;
 
 import org.apache.log4j.Logger;
+import org.xml.sax.InputSource;
+
 import za.co.junghans.hszt.semin.ir.analyzer.KwAnalyzer;
 import za.co.junghans.hszt.semin.ir.analyzer.LuceneKwAnalyzer;
 
 import javax.swing.*;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import java.io.StringReader;
+import javax.xml.xpath.XPathConstants;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,34 +44,52 @@ public class AnalyzerGui {
                 KwAnalyzer kwAnalyzer = new LuceneKwAnalyzer();
                 
                 //TODO: Parse txtInputHtml here
-                String parsed_text = "";
-                
+                String raw_html = txtInputHtml.getText();
+                StringBuffer parsed_text = new StringBuffer();
+                           
                 // 1. Only look at Contents between <body> and </body>, <title> and </title>
-                Pattern p_title = Pattern.compile("<title>(.*)</title>");
-                Pattern p_body = Pattern.compile("<body>(.*)</body>");
+                Pattern p_title = Pattern.compile("<title>(.*)</title>", Pattern.MULTILINE | Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+                Pattern p_body = Pattern.compile("<body.*>(.*)</body>", Pattern.MULTILINE | Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
                 
-                Matcher m_title = p_title.matcher(txtInputHtml.getText());
-                Matcher m_body = p_body.matcher("<body>lots of noise here <scrip></script><img /></body>");
+               
+                Matcher m_title = p_title.matcher(raw_html);
+                Matcher m_body = p_body.matcher(raw_html);
                 
-                if (m_title.matches()) {
-                	log.debug(m_title.group(1));
-                	parsed_text += m_title.group(1);
+                
+                while (m_title.find()) {
+                	
+                	parsed_text.append(m_title.group(1));
+                	
                 }
                 
-                if (m_body.matches()) {
-                	log.debug("body found");
+                while (m_body.find()) {
+                	
+                	parsed_text.append(m_body.group(1));
                 }
                 
+                log.debug(parsed_text.toString());
+                            
+                // This only works for valid html documents
+                /*
+                String docroot = txtInputHtml.getText();
+                XPath xxpath = XPathFactory.newInstance().newXPath();
+                InputSource inputSource = new InputSource(new StringReader(docroot)); 
+                String body = "";
+				try {
+					body = (String) xxpath.evaluate("//body", inputSource, XPathConstants.STRING);
+					log.debug("a");
+				} catch (XPathExpressionException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                */             
                 
                 
-                // 2. Ignore all tags in <tag> </tag> <tag>
-              
+                // 2. Replace tags with blank space so that contents in and outside tags don't stick together.
                 
-                // 3. Replace tags with blank space so that contents in and outside tags don't stick together.
-                // Do the regex magic here
+                 	 	
                 
-                
-                String result = kwAnalyzer.analyze(txtInputHtml.getText(), Arrays.asList(txtKeywords.getText().split(",")));
+                String result = kwAnalyzer.analyze(parsed_text.toString(), Arrays.asList(txtKeywords.getText().split(",")));
                 txtResults.setText(result);
             }
         });
@@ -102,7 +128,7 @@ public class AnalyzerGui {
         form.add(label1, gbc);
         txtInputHtml = new JTextArea();
         txtInputHtml.setEditable(true);
-        txtInputHtml.setText("Insert HTML here");
+        txtInputHtml.setText("<title>MYTitle asdad</title>\n\r<body>foo \n\r bar</body>");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
         gbc.gridy = 2;
