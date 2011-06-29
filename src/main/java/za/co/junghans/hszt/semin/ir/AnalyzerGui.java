@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 /**
  * User: dkummer
  * Date: 12.06.11
@@ -31,6 +34,35 @@ public class AnalyzerGui {
                 //do it baby!
                 log.debug("Do some calculating baby!");
                 KwAnalyzer kwAnalyzer = new LuceneKwAnalyzer();
+                
+                //TODO: Parse txtInputHtml here
+                String parsed_text = "";
+                
+                // 1. Only look at Contents between <body> and </body>, <title> and </title>
+                Pattern p_title = Pattern.compile("<title>(.*)</title>");
+                Pattern p_body = Pattern.compile("<body>(.*)</body>");
+                
+                Matcher m_title = p_title.matcher(txtInputHtml.getText());
+                Matcher m_body = p_body.matcher("<body>lots of noise here <scrip></script><img /></body>");
+                
+                if (m_title.matches()) {
+                	log.debug(m_title.group(1));
+                	parsed_text += m_title.group(1);
+                }
+                
+                if (m_body.matches()) {
+                	log.debug("body found");
+                }
+                
+                
+                
+                // 2. Ignore all tags in <tag> </tag> <tag>
+              
+                
+                // 3. Replace tags with blank space so that contents in and outside tags don't stick together.
+                // Do the regex magic here
+                
+                
                 String result = kwAnalyzer.analyze(txtInputHtml.getText(), Arrays.asList(txtKeywords.getText().split(",")));
                 txtResults.setText(result);
             }
