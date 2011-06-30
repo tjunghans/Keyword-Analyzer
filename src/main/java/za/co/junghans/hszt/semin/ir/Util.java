@@ -21,13 +21,14 @@ public class Util {
 
         StringBuffer resultBuffer = new StringBuffer();
         resultBuffer.append(website.title());
+        resultBuffer.append(" "); // Space between title and body
         resultBuffer.append(website.body().text());
 
         return resultBuffer.toString();
     }
 
     public static List<String> getKeywordList() {
-        return Arrays.asList(AnalyzeGui.getInstance().getKeywords().split(","));
+        return Arrays.asList(AnalyzeGui.getInstance().getKeywords().replaceAll(",\\s*", ",").split(","));        
     }
 
     public static String getTargetUrl() {
@@ -35,7 +36,7 @@ public class Util {
     }
 
     public static String formatTargetUrl(String url) {
-        url = url.toLowerCase();
+        //url = url.toLowerCase();
         if (!StringUtils.startsWith(url, "http")) {
             url = "http://" + url;
         }

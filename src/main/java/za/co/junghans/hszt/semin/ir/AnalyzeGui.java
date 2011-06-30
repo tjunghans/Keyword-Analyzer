@@ -39,7 +39,7 @@ public class AnalyzeGui {
             @Override
             public void focusGained(FocusEvent focusEvent) {
                 super.focusGained(focusEvent);
-                txtKeywords.setText("");
+                //txtKeywords.setText("");
             }
         });
     }
@@ -102,7 +102,7 @@ public class AnalyzeGui {
         label2.setText("Keywords");
         mainPanel.add(label2, cc.xy(1, 3));
         txtKeywords = new JTextField();
-        txtKeywords.setText("keyword1, keyword2, keyword3");
+        txtKeywords.setText("Black mamba, mamba, venom, poison, snake, prey");
         mainPanel.add(txtKeywords, cc.xy(3, 3, CellConstraints.FILL, CellConstraints.DEFAULT));
         btnCalculate = new JButton();
         btnCalculate.setText("Calculate");
@@ -123,7 +123,7 @@ public class AnalyzeGui {
         label4.setText("Status");
         mainPanel.add(label4, cc.xy(1, 9));
         txtUrl = new JTextField();
-        txtUrl.setText("http://www.tagesanzeiger.ch");
+        txtUrl.setText("http://local.ir.junghans.co.za/blackmamba.php");
         mainPanel.add(txtUrl, cc.xy(3, 1, CellConstraints.FILL, CellConstraints.DEFAULT));
         btnPaste = new JButton();
         btnPaste.setText("Paste");

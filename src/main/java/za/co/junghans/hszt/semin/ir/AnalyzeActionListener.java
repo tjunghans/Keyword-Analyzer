@@ -41,7 +41,7 @@ public class AnalyzeActionListener implements ActionListener {
 
         keywords = Util.getKeywordList();
         if(keywords.isEmpty() || StringUtils.isEmpty(keywords.get(0))) {
-            form.log("Keywords mussing, please supply at least one keyword");
+            form.log("Keywords missing, please supply at least one keyword");
         }
 
         form.log("Starting...");
