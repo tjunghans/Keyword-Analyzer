@@ -12,6 +12,7 @@ import org.apache.lucene.util.Version;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -59,7 +60,6 @@ public class LuceneKwAnalyzer implements KwAnalyzer {
                 
                 keywordSet.add(term.trim().toLowerCase());
                 
-                
                 /*x*/
                 resultBuffer.append(String.format("%5d (%5d, %5d) %s\n",increment,start,end,term));
                 
@@ -68,18 +68,19 @@ public class LuceneKwAnalyzer implements KwAnalyzer {
                      
             	
         	for(String keyword : keywords) {
-        		if(keywordSet.contains(keyword)) {
-        			log.debug("Contains: " + keyword);
-        		} else {
+        		if(!keywordSet.contains(keyword)) {
         			missingKeywords.add(keyword);
         		}
         	}
 
+        	// Coverage as percent rounded to two decimals
+            BigDecimal coverage = new BigDecimal(((double)(keywordSet.size() - missingKeywords.size())/keywordSet.size() * 100));
+            coverage = coverage.setScale(2,BigDecimal.ROUND_HALF_UP);
             
-            log.debug("ratio: " + (keywordSet.size() - missingKeywords.size()) + "/" + keywordSet.size());
+            log.debug("Coverage: " + (keywordSet.size() - missingKeywords.size()) + "/" + keywordSet.size() + " " + coverage + "%");
             log.debug("Missing keywords: " + missingKeywords.toString());
-            log.debug("Terms length " + i);
-            log.debug("keywordSet Length " + keywordSet.size());
+            log.debug("Keywords: " + i);
+            log.debug("Unique Keywords: " + keywordSet.size());
         } catch (IOException e) {
             log.error(e.getMessage());
         }
