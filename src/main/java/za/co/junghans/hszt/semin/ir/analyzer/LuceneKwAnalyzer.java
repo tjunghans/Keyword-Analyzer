@@ -28,6 +28,7 @@ public class LuceneKwAnalyzer implements KwAnalyzer {
 
     
     public String analyze(String input, List<String> keywords) {
+        //todo incorporate keyword in lucene search
 
         StringBuffer resultBuffer = new StringBuffer();
 
