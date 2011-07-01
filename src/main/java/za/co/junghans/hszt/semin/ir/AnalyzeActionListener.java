@@ -2,6 +2,8 @@ package za.co.junghans.hszt.semin.ir;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+
+import za.co.junghans.hszt.semin.ir.analyzer.AnalyzerResult;
 import za.co.junghans.hszt.semin.ir.analyzer.KwAnalyzer;
 
 import java.awt.event.ActionEvent;
@@ -28,7 +30,7 @@ public class AnalyzeActionListener implements ActionListener {
      @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String parsedHtml = "";
-        String result;
+        AnalyzerResult result;
         List<String> keywords;
 
         try {
@@ -47,7 +49,11 @@ public class AnalyzeActionListener implements ActionListener {
         form.log("Starting...");
         result = analyzer.analyze(parsedHtml, keywords);
         form.log("Done!");
-        form.setFoundKeywords(result);
+        form.setFoundKeywords(result.keywordsFound);
+        form.setCoverage(result.coverage.toPlainString() + "%" + " or " + (result.keywordsSize - result.keywordsMissingSize) + "/" + result.keywordsSize);
+        form.setMissingKeywords(result.keywordsMissing);
+        form.setTotalKeywords(Integer.toString(result.totalKeywords));
+        form.setUniqueKeywords(Integer.toString(result.uniqueKeywords));
     }
 
 }

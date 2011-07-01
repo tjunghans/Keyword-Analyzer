@@ -19,7 +19,6 @@ public class AnalyzeGui {
     private JPanel mainPanel;
     private JTextField txtKeywords;
     private JButton btnCalculate;
-    private JTextArea txtResult;
     private JTextField txtUrl;
     private JButton btnPaste;
     private JButton btnCopy;
@@ -87,8 +86,8 @@ public class AnalyzeGui {
         this.txtUniqueKeywords.setText(uniqueKeywords);
     }
 
-    public void setCoverage(JLabel txtCoverage) {
-        this.txtCoverage = txtCoverage;
+    public void setCoverage(String txtCoverage) {
+        this.txtCoverage.setText(txtCoverage);
     }
 
     public void log(String text) {

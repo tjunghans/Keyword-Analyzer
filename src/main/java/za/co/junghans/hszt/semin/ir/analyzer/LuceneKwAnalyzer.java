@@ -1,7 +1,6 @@
 package za.co.junghans.hszt.semin.ir.analyzer;
 
 import org.apache.log4j.Logger;
-import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
@@ -30,17 +29,17 @@ public class LuceneKwAnalyzer implements KwAnalyzer {
 
     public LuceneKwAnalyzer() {
         analyzer = new StandardAnalyzer(Version.LUCENE_32);
-        
         fieldName = "fieldName";
     }
 
     
-    public String analyze(String input, List<String> keywords) {
+    public AnalyzerResult analyze(String input, List<String> keywords) {
         //todo incorporate keyword in lucene search
 
         StringBuffer resultBuffer = new StringBuffer();
         Set<String> keywordSet = new HashSet<String>();
-        List<String> missingKeywords = new ArrayList<String>(); 
+        List<String> missingKeywords = new ArrayList<String>();
+        AnalyzerResult analyzerResult = new AnalyzerResult();
 
         Reader inputReader = new StringReader(input);
         TokenStream tokenStream = analyzer.tokenStream(fieldName, inputReader);
@@ -74,18 +73,25 @@ public class LuceneKwAnalyzer implements KwAnalyzer {
         	}
 
         	// Coverage as percent rounded to two decimals
-            BigDecimal coverage = new BigDecimal(((double)(keywordSet.size() - missingKeywords.size())/keywordSet.size() * 100));
-            coverage = coverage.setScale(2,BigDecimal.ROUND_HALF_UP);
+            BigDecimal coverage = new BigDecimal(((double)(keywords.size() - missingKeywords.size())/keywords.size() * 100));
+            analyzerResult.coverage = coverage.setScale(2,BigDecimal.ROUND_HALF_UP);
+            analyzerResult.keywordsMissing = missingKeywords.toString();
+            analyzerResult.totalKeywords = i;
+            analyzerResult.uniqueKeywords = keywordSet.size();
+            analyzerResult.keywordsMissingSize = missingKeywords.size();
+            analyzerResult.keywordsSize = keywords.size();
             
-            log.debug("Coverage: " + (keywordSet.size() - missingKeywords.size()) + "/" + keywordSet.size() + " " + coverage + "%");
-            log.debug("Missing keywords: " + missingKeywords.toString());
-            log.debug("Keywords: " + i);
-            log.debug("Unique Keywords: " + keywordSet.size());
+            //log.debug("Coverage: " + ((keywords.size() - missingKeywords.size()) + "/" + (keywords.size() + " " + coverage + "%");
+            //log.debug("Missing keywords: " + missingKeywords.toString());
+            //log.debug("Keywords: " + i);
+            //log.debug("Unique Keywords: " + keywordSet.size());
         } catch (IOException e) {
             log.error(e.getMessage());
         }
 
+        analyzerResult.keywordsFound = resultBuffer.toString();
 
-        return resultBuffer.toString();
+        return analyzerResult;
+       
     }
 }
