@@ -47,7 +47,7 @@ public class AnalyzeActionListener implements ActionListener {
         form.log("Starting...");
         result = analyzer.analyze(parsedHtml, keywords);
         form.log("Done!");
-        form.setResult(result);
+        form.setFoundKeywords(result);
     }
 
 }

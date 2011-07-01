@@ -41,7 +41,7 @@ public class ClipboardActionListener implements ActionListener {
                     }
                 }
         } else if (actionEvent.getActionCommand().toLowerCase().contains("copy")) {
-            StringSelection data = new StringSelection(form.getResult());
+            StringSelection data = new StringSelection(form.getFoundKeywords());
             clipboard.setContents(data, data);
         } else {
             log.error("Unknown clipboard command");

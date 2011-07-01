@@ -24,6 +24,11 @@ public class AnalyzeGui {
     private JButton btnPaste;
     private JButton btnCopy;
     private JTextArea txtStatus;
+    private JTextArea txtMissingKeywords;
+    private JLabel txtTotalKeywords;
+    private JLabel txtUniqueKeywords;
+    private JLabel txtCoverage;
+    private JTextArea txtFoundKeywords;
 
     private static AnalyzeGui _instance;
 
@@ -58,16 +63,32 @@ public class AnalyzeGui {
         this.txtUrl.setText(url);
     }
 
-    public void setResult(String result) {
-        txtResult.setText(result);
+    public void setFoundKeywords(String foundKeywords) {
+        this.txtFoundKeywords.setText(foundKeywords);
     }
 
-    public String getResult() {
-        return txtResult.getText();
+    public String getFoundKeywords() {
+        return this.txtFoundKeywords.getText();
     }
 
     public String getKeywords() {
         return txtKeywords.getText();
+    }
+
+    public void setMissingKeywords(String missingKeywords) {
+        this.txtMissingKeywords.setText(missingKeywords);
+    }
+
+    public void setTotalKeywords(String totalKeywords) {
+        this.txtTotalKeywords.setText(totalKeywords);
+    }
+
+    public void setUniqueKeywords(String uniqueKeywords) {
+        this.txtUniqueKeywords.setText(uniqueKeywords);
+    }
+
+    public void setCoverage(JLabel txtCoverage) {
+        this.txtCoverage = txtCoverage;
     }
 
     public void log(String text) {
@@ -92,62 +113,95 @@ public class AnalyzeGui {
      */
     private void $$$setupUI$$$() {
         mainPanel = new JPanel();
-        mainPanel.setLayout(new FormLayout("fill:d:noGrow,left:4dlu:noGrow,fill:d:grow,left:4dlu:noGrow,fill:max(d;4px):noGrow", "center:d:noGrow,top:3dlu:noGrow,center:max(d;4px):noGrow,top:3dlu:noGrow,center:max(d;4px):noGrow,top:3dlu:noGrow,center:max(d;4px):noGrow,top:3dlu:noGrow,center:max(d;4px):noGrow"));
+        mainPanel.setLayout(new FormLayout("fill:d:grow,left:4dlu:noGrow,fill:max(d;4px):noGrow", "center:max(d;4px):noGrow,top:3dlu:noGrow,center:d:noGrow,top:3dlu:noGrow,center:max(d;4px):noGrow,top:3dlu:noGrow,center:max(d;4px):noGrow,top:3dlu:noGrow,center:max(d;4px):noGrow,top:3dlu:noGrow,center:max(d;4px):noGrow,top:3dlu:noGrow,center:max(d;4px):noGrow,top:3dlu:noGrow,center:max(d;4px):noGrow,top:3dlu:noGrow,center:d:grow,top:3dlu:noGrow,center:max(d;4px):noGrow,top:3dlu:noGrow,center:max(d;4px):noGrow,top:3dlu:noGrow,center:d:grow"));
         mainPanel.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), null));
-        final JLabel label1 = new JLabel();
-        label1.setText("URL");
-        CellConstraints cc = new CellConstraints();
-        mainPanel.add(label1, cc.xy(1, 1));
-        final JLabel label2 = new JLabel();
-        label2.setText("Keywords");
-        mainPanel.add(label2, cc.xy(1, 3));
         txtKeywords = new JTextField();
-        txtKeywords.setText("Black mamba, mamba, venom, poison, snake, prey");
-        mainPanel.add(txtKeywords, cc.xy(3, 3, CellConstraints.FILL, CellConstraints.DEFAULT));
+        txtKeywords.setText("keyword1, keyword2, keywordN");
+        CellConstraints cc = new CellConstraints();
+        mainPanel.add(txtKeywords, cc.xy(1, 7, CellConstraints.FILL, CellConstraints.DEFAULT));
         btnCalculate = new JButton();
-        btnCalculate.setText("Calculate");
+        btnCalculate.setText("Calculate Keyword Coverage");
         btnCalculate.setMnemonic('C');
         btnCalculate.setDisplayedMnemonicIndex(0);
-        mainPanel.add(btnCalculate, cc.xy(3, 5));
-        final JLabel label3 = new JLabel();
-        label3.setText("Result");
-        mainPanel.add(label3, cc.xy(1, 7));
+        mainPanel.add(btnCalculate, cc.xy(1, 9));
         final JScrollPane scrollPane1 = new JScrollPane();
         scrollPane1.setVerticalScrollBarPolicy(22);
-        mainPanel.add(scrollPane1, cc.xy(3, 7, CellConstraints.FILL, CellConstraints.FILL));
-        txtResult = new JTextArea();
-        txtResult.setEditable(false);
-        txtResult.setRows(15);
-        scrollPane1.setViewportView(txtResult);
-        final JLabel label4 = new JLabel();
-        label4.setText("Status");
-        mainPanel.add(label4, cc.xy(1, 9));
+        mainPanel.add(scrollPane1, cc.xy(1, 13, CellConstraints.FILL, CellConstraints.FILL));
+        txtFoundKeywords = new JTextArea();
+        txtFoundKeywords.setEditable(false);
+        txtFoundKeywords.setRows(15);
+        scrollPane1.setViewportView(txtFoundKeywords);
         txtUrl = new JTextField();
-        txtUrl.setText("http://local.ir.junghans.co.za/blackmamba.php");
-        mainPanel.add(txtUrl, cc.xy(3, 1, CellConstraints.FILL, CellConstraints.DEFAULT));
+        txtUrl.setText("http://www.example.com");
+        mainPanel.add(txtUrl, cc.xy(1, 3, CellConstraints.FILL, CellConstraints.DEFAULT));
         btnPaste = new JButton();
         btnPaste.setText("Paste");
         btnPaste.setMnemonic('P');
         btnPaste.setDisplayedMnemonicIndex(0);
-        mainPanel.add(btnPaste, cc.xy(5, 1));
+        mainPanel.add(btnPaste, cc.xy(3, 3));
         btnCopy = new JButton();
         btnCopy.setText("Copy");
         btnCopy.setMnemonic('O');
         btnCopy.setDisplayedMnemonicIndex(1);
-        mainPanel.add(btnCopy, cc.xy(5, 7));
+        mainPanel.add(btnCopy, cc.xy(3, 13));
+        final JLabel label1 = new JLabel();
+        label1.setText("URL");
+        mainPanel.add(label1, cc.xy(1, 1));
+        final JLabel label2 = new JLabel();
+        label2.setText("Keywords");
+        mainPanel.add(label2, cc.xy(1, 5));
+        final JLabel label3 = new JLabel();
+        label3.setText("Keywords found in document");
+        mainPanel.add(label3, cc.xy(1, 11));
         final JScrollPane scrollPane2 = new JScrollPane();
         scrollPane2.setVerticalScrollBarPolicy(22);
-        mainPanel.add(scrollPane2, cc.xy(3, 9, CellConstraints.FILL, CellConstraints.FILL));
+        mainPanel.add(scrollPane2, cc.xy(1, 17, CellConstraints.FILL, CellConstraints.FILL));
+        txtMissingKeywords = new JTextArea();
+        txtMissingKeywords.setLineWrap(true);
+        txtMissingKeywords.setRows(10);
+        scrollPane2.setViewportView(txtMissingKeywords);
+        final JLabel label4 = new JLabel();
+        label4.setText("Keywords missing");
+        mainPanel.add(label4, cc.xy(1, 15));
+        final JPanel panel1 = new JPanel();
+        panel1.setLayout(new FormLayout("fill:max(d;4px):noGrow,left:4dlu:noGrow,fill:max(d;4px):noGrow", "center:d:grow,top:3dlu:noGrow,center:max(d;4px):noGrow,top:3dlu:noGrow,center:max(d;4px):noGrow,top:3dlu:noGrow,center:max(d;4px):noGrow"));
+        mainPanel.add(panel1, cc.xy(1, 19));
+        panel1.setBorder(BorderFactory.createTitledBorder("Statistics"));
+        final JLabel label5 = new JLabel();
+        label5.setText("Total Keywords:");
+        panel1.add(label5, cc.xy(1, 3));
+        final JLabel label6 = new JLabel();
+        label6.setText("Unique Keywords:");
+        panel1.add(label6, cc.xy(1, 5));
+        final JLabel label7 = new JLabel();
+        label7.setText("Coverage:");
+        panel1.add(label7, cc.xy(1, 7));
+        txtTotalKeywords = new JLabel();
+        txtTotalKeywords.setText("---");
+        panel1.add(txtTotalKeywords, cc.xy(3, 3));
+        txtUniqueKeywords = new JLabel();
+        txtUniqueKeywords.setText("---");
+        panel1.add(txtUniqueKeywords, cc.xy(3, 5));
+        txtCoverage = new JLabel();
+        txtCoverage.setText("---");
+        panel1.add(txtCoverage, cc.xy(3, 7));
+        final JScrollPane scrollPane3 = new JScrollPane();
+        scrollPane3.setVerticalScrollBarPolicy(22);
+        mainPanel.add(scrollPane3, cc.xy(1, 23, CellConstraints.FILL, CellConstraints.FILL));
         txtStatus = new JTextArea();
         txtStatus.setEditable(false);
         txtStatus.setEnabled(true);
         txtStatus.setLineWrap(false);
-        txtStatus.setRows(5);
+        txtStatus.setRows(10);
         txtStatus.setWrapStyleWord(false);
-        scrollPane2.setViewportView(txtStatus);
+        scrollPane3.setViewportView(txtStatus);
+        final JLabel label8 = new JLabel();
+        label8.setText("Status");
+        mainPanel.add(label8, cc.xy(1, 21));
         label1.setLabelFor(txtUrl);
         label2.setLabelFor(txtKeywords);
-        label3.setLabelFor(txtResult);
+        label3.setLabelFor(txtFoundKeywords);
+        label4.setLabelFor(txtMissingKeywords);
     }
 
     /**
