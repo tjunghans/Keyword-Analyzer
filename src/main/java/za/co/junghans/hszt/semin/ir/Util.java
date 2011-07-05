@@ -8,11 +8,6 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * User: dkummer
- * Date: 30.06.11
- * Time: 18:49
- */
 public class Util {
 
     public static String loadAndParsePage() throws IOException {

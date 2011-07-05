@@ -9,11 +9,6 @@ import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * User: dkummer
- * Date: 30.06.11
- * Time: 18:29
- */
 public class ClipboardActionListener implements ActionListener {
 
     private Clipboard clipboard;

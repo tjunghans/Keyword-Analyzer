@@ -10,11 +10,6 @@ import java.awt.event.FocusEvent;
 import java.text.DateFormat;
 import java.util.Date;
 
-/**
- * User: dkummer
- * Date: 30.06.11
- * Time: 10:24
- */
 public class AnalyzeGui {
     private JPanel mainPanel;
     private JTextField txtKeywords;

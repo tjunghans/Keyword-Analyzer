@@ -11,11 +11,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * User: dkummer
- * Date: 30.06.11
- * Time: 18:44
- */
 public class AnalyzeActionListener implements ActionListener {
 
     private Logger log = Logger.getLogger(KeywordAnalyzer.class);
