@@ -2,7 +2,7 @@ package za.co.junghans.hszt.semin.ir.analyzer;
 
 import org.apache.log4j.Logger;
 import org.apache.lucene.analysis.TokenStream;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.de.GermanAnalyzer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
@@ -20,7 +20,7 @@ import java.util.Set;
 public class LuceneKwAnalyzer implements KwAnalyzer {
 
     //private Analyzer analyzer;
-	private StandardAnalyzer analyzer;
+	private GermanAnalyzer analyzer;
     private String fieldName;
     
     
@@ -28,7 +28,7 @@ public class LuceneKwAnalyzer implements KwAnalyzer {
     private static final Logger log = Logger.getLogger(LuceneKwAnalyzer.class.getName());
 
     public LuceneKwAnalyzer() {
-        analyzer = new StandardAnalyzer(Version.LUCENE_32);
+        analyzer = new GermanAnalyzer(Version.LUCENE_32);
         fieldName = "fieldName";
     }
 
@@ -67,7 +67,8 @@ public class LuceneKwAnalyzer implements KwAnalyzer {
                      
             	
         	for(String keyword : keywords) {
-        		if(!keywordSet.contains(keyword)) {
+        	
+        		if(!keywordSet.contains(keyword.toLowerCase())) {
         			missingKeywords.add(keyword);
         		}
         	}
@@ -81,10 +82,6 @@ public class LuceneKwAnalyzer implements KwAnalyzer {
             analyzerResult.keywordsMissingSize = missingKeywords.size();
             analyzerResult.keywordsSize = keywords.size();
             
-            //log.debug("Coverage: " + ((keywords.size() - missingKeywords.size()) + "/" + (keywords.size() + " " + coverage + "%");
-            //log.debug("Missing keywords: " + missingKeywords.toString());
-            //log.debug("Keywords: " + i);
-            //log.debug("Unique Keywords: " + keywordSet.size());
         } catch (IOException e) {
             log.error(e.getMessage());
         }

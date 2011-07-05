@@ -1,0 +1,132 @@
+<class-diagram version="1.0.3" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" corner="BOTTOM_RIGHT" language="java" name="za.co.junghans.hszt.semin.ir.AnalyzeActionListener" 
+    project="Keyword-Analyzer" 
+    file="/Keyword-Analyzer/src/main/java/za/co/junghans/hszt/semin/ir/AnalyzeActionListener.java" binary="false">    
+    <position x="161" y="104" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="2" corner="BOTTOM_RIGHT" language="java" name="za.co.junghans.hszt.semin.ir.AnalyzeGui" 
+    project="Keyword-Analyzer" file="/Keyword-Analyzer/src/main/java/za/co/junghans/hszt/semin/ir/AnalyzeGui.java" 
+    binary="false">    
+    <position x="480" y="531" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="3" corner="BOTTOM_RIGHT" language="java" name="za.co.junghans.hszt.semin.ir.ClipboardActionListener" 
+    project="Keyword-Analyzer" 
+    file="/Keyword-Analyzer/src/main/java/za/co/junghans/hszt/semin/ir/ClipboardActionListener.java" binary="false">    
+    <position x="161" y="388" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="4" corner="BOTTOM_RIGHT" language="java" name="za.co.junghans.hszt.semin.ir.KeywordAnalyzer" 
+    project="Keyword-Analyzer" file="/Keyword-Analyzer/src/main/java/za/co/junghans/hszt/semin/ir/KeywordAnalyzer.java" 
+    binary="false">    
+    <position x="797" y="89" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="5" corner="BOTTOM_RIGHT" language="java" name="za.co.junghans.hszt.semin.ir.Util" 
+    project="Keyword-Analyzer" file="/Keyword-Analyzer/src/main/java/za/co/junghans/hszt/semin/ir/Util.java" 
+    binary="false">    
+    <position x="822" y="284" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <class id="6" corner="BOTTOM_RIGHT" language="java" name="za.co.junghans.hszt.semin.ir.analyzer.AnalyzerResult" 
+    project="Keyword-Analyzer" 
+    file="/Keyword-Analyzer/src/main/java/za/co/junghans/hszt/semin/ir/analyzer/AnalyzerResult.java" binary="false">    
+    <position x="826" y="465" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <interface id="7" corner="BOTTOM_RIGHT" language="java" name="za.co.junghans.hszt.semin.ir.analyzer.KwAnalyzer" 
+    project="Keyword-Analyzer" 
+    file="/Keyword-Analyzer/src/main/java/za/co/junghans/hszt/semin/ir/analyzer/KwAnalyzer.java" binary="false">    
+    <position x="477" y="60" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </interface>  
+  <class id="8" corner="BOTTOM_RIGHT" language="java" name="za.co.junghans.hszt.semin.ir.analyzer.LuceneKwAnalyzer" 
+    project="Keyword-Analyzer" 
+    file="/Keyword-Analyzer/src/main/java/za/co/junghans/hszt/semin/ir/analyzer/LuceneKwAnalyzer.java" binary="false">    
+    <position x="479" y="199" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true"/>      
+      <operations public="true" package="true" protected="true" private="true"/>    
+    </display>  
+  </class>  
+  <association>    
+    <end type="SOURCE" nodeId="1" navigable="false">      
+      <attribute name="analyzer"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="2" navigable="false">      
+      <attribute name="_instance"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="4" navigable="false">      
+      <attribute name="form"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="3" navigable="false">      
+      <attribute name="form"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <end type="SOURCE" nodeId="1" navigable="false">      
+      <attribute name="form"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization>    
+    <end type="SOURCE" nodeId="8"/>    
+    <end type="TARGET" nodeId="7"/>  
+  </realization>  
+  <association>    
+    <end type="SOURCE" nodeId="4" navigable="false">      
+      <attribute name="analyzer"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" nodeId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" package="true" initial-value="false" signature="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true"/>    
+    <operations public="true" package="true" protected="true" private="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
